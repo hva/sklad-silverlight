@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Browser;
-using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using Microsoft.Practices.Prism.Modularity;
@@ -21,8 +20,10 @@ namespace Warehouse.Silverlight
         {
             base.Run(runWithDefaultConfiguration);
 
-            ((FrameworkElement)Shell).Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
+            ((FrameworkElement)Shell).Language = XmlLanguage.GetLanguage("ru-RU");
+
             WebRequest.RegisterPrefix("http://", WebRequestCreator.ClientHttp);
+            WebRequest.RegisterPrefix("https://", WebRequestCreator.ClientHttp);
 
             var authStore = Container.Resolve<IAuthStore>();
             var navigationService = Container.Resolve<INavigationService>();

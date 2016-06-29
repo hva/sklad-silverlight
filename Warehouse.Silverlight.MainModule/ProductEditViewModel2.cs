@@ -359,7 +359,7 @@ namespace Warehouse.Silverlight.MainModule
             size = product.Size;
             k = product.K.ToString("0.##");
             priceOpt = product.PriceOpt.ToString(CultureInfo.InvariantCulture);
-            priceRozn = product.PriceRozn;
+            priceRozn = Convert.ToInt64(product.PriceRozn);
             weight = product.Weight;
             count = product.Count.ToString(CultureInfo.InvariantCulture);
             if (product.Nd != null)
