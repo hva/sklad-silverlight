@@ -139,10 +139,10 @@ namespace Warehouse.Silverlight.Data
             var token = authStore.LoadToken();
             using (var client = new BearerHttpClient(token.AccessToken))
             {
-                var uriString = string.Format("api/products/{0}/files", productId);
+                var uriString = string.Format("api/files/{0}/products", fileId);
                 var uri = new Uri(uriString, UriKind.Relative);
-                var data = new Dictionary<string, string> { {"fileId", fileId} };
-                using (var content = new FormUrlEncodedContent(data))
+                var data = JsonConvert.SerializeObject(new[] {productId});
+                using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
                 {
                     var resp = await client.PostAsync(uri, content);
                     if (resp.StatusCode == HttpStatusCode.Created)
@@ -173,7 +173,7 @@ namespace Warehouse.Silverlight.Data
             using (var client = new BearerHttpClient(token.AccessToken))
             {
                 var q = string.Join(",", fileIds);
-                var uriString = string.Format("api/products/{0}/files?ids={1}", productId, q);
+                var uriString = string.Format("api/files?ids={0}", q);
                 var uri = new Uri(uriString, UriKind.Relative);
                 var resp = await client.DeleteAsync(uri);
                 return new AsyncResult { Succeed = resp.StatusCode == HttpStatusCode.OK };
