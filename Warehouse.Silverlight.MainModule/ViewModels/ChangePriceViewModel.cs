@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -88,8 +89,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var data = Items.Select(x => new ProductPriceUpdate
             {
                 Id = x.Product.Id,
-                NewPriceOpt = x.NewPriceOpt,
-                NewPriceRozn = x.NewPriceRozn
+                NewPriceOpt = Math.Round((double)x.NewPriceOpt, 2),
+                NewPriceRozn = Math.Round((double)x.NewPriceRozn, 2),
             }).ToArray();
 
             IsBusy = true;

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Globalization;
 using Microsoft.Practices.Prism.ViewModel;
 using Warehouse.Silverlight.Models;
 
@@ -6,8 +6,8 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 {
     public class ChangePriceItem : NotificationObject
     {
-        private long newPriceOpt;
-        private long newPriceRozn;
+        private decimal newPriceOpt;
+        private decimal newPriceRozn;
         private readonly string k;
         private readonly string length;
 
@@ -15,13 +15,13 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
         {
             Product = p;
 
-            k = Convert.ToString(p.K);
-            length = Convert.ToString(p.Length);
+            k = p.K.ToString(CultureInfo.CurrentCulture);
+            length = p.Length.ToString(CultureInfo.CurrentCulture);
         }
 
         public Product Product { get; private set; }
 
-        public long NewPriceOpt
+        public decimal NewPriceOpt
         {
             get { return newPriceOpt; }
             set
@@ -34,7 +34,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             }
         }
 
-        public long NewPriceRozn
+        public decimal NewPriceRozn
         {
             get { return newPriceRozn; }
             set
@@ -53,10 +53,10 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var x = new decimal(percentage);
             var b = a * (1 + x / 100);
 
-            NewPriceOpt = (long)(decimal.Ceiling(b / 100) * 100);
+            NewPriceOpt = decimal.Ceiling(b * 100) / 100;
 
-            var priceOptStr = Convert.ToString(newPriceOpt);
-            NewPriceRozn = ProductExtensions.CalculatePriceRozn(priceOptStr, k, length, Product.IsSheet);
+            var priceOptStr = newPriceOpt.ToString(CultureInfo.CurrentCulture);
+            NewPriceRozn = (decimal) ProductExtensions.CalculatePriceRozn(priceOptStr, k, length, Product.IsSheet);
         }
     }
 }
