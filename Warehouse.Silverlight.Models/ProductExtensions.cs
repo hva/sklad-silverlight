@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Globalization;
 
 namespace Warehouse.Silverlight.Models
 {
     public static class ProductExtensions
     {
-        public static long CalculatePriceRozn(string priceOpt, string k, string length, bool isSheet)
+        public static double CalculatePriceRozn(string priceOpt, string k, string length, bool isSheet)
         {
             var _priceOpt = decimal.Parse(priceOpt);
             var _k = decimal.Parse(k);
@@ -14,14 +14,14 @@ namespace Warehouse.Silverlight.Models
                 var _l = decimal.Parse(length);
                 rozn *= _l;
             }
-            return (long)(decimal.Ceiling(rozn / 100) * 100);
+            return (double) decimal.Ceiling(rozn * 100) / 100;
         }
 
-        public static long CalculatePriceRozn(this Product p)
+        public static double CalculatePriceRozn(this Product p)
         {
-            var priceOpt = Convert.ToString(p.PriceOpt);
-            var k = Convert.ToString(p.K);
-            var length = Convert.ToString(p.Length);
+            var priceOpt = p.PriceOpt.ToString(CultureInfo.InvariantCulture);
+            var k = p.K.ToString(CultureInfo.InvariantCulture);
+            var length = p.Length.ToString(CultureInfo.InvariantCulture);
             return CalculatePriceRozn(priceOpt, k, length, p.IsSheet);
         }
     }

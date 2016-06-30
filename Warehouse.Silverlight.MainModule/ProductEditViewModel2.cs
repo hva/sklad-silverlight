@@ -13,7 +13,7 @@ namespace Warehouse.Silverlight.MainModule
         protected string size;
         private string k;
         private string priceOpt;
-        private long priceRozn;
+        private double priceRozn;
         private double weight;
         private string count;
         private string nd;
@@ -47,13 +47,13 @@ namespace Warehouse.Silverlight.MainModule
                 Name = name,
                 Size = size,
                 K = Math.Round(double.Parse(k), 2),
-                PriceOpt = long.Parse(priceOpt),
+                PriceOpt = Math.Round(double.Parse(priceOpt), 2),
                 PriceRozn = priceRozn,
                 Weight = weight,
                 Count = int.Parse(count),
                 Nd = ParseNd(nd),
                 Length = Math.Round(double.Parse(length), 2),
-                PriceIcome = long.Parse(priceIcome),
+                PriceIcome = Math.Round(double.Parse(priceIcome), 2),
                 Internal = Internal,
                 IsSheet = GetIsSheet(),
                 Firma = Firma,
@@ -152,19 +152,19 @@ namespace Warehouse.Silverlight.MainModule
         private void ValidatePriceOpt()
         {
             errorsContainer.ClearErrors(() => PriceOpt);
-            errorsContainer.SetErrors(() => PriceOpt, Validate.Long(PriceOpt));
+            errorsContainer.SetErrors(() => PriceOpt, Validate.Double(PriceOpt));
         }
 
         #endregion
 
         #region PriceRozn
 
-        public long PriceRozn
+        public double PriceRozn
         {
             get { return priceRozn; }
             set
             {
-                if (priceRozn != value)
+                if (Math.Abs(priceRozn - value) > double.Epsilon)
                 {
                     priceRozn = value;
                     RaisePropertyChanged(() => PriceRozn);
@@ -330,7 +330,7 @@ namespace Warehouse.Silverlight.MainModule
         private void ValidatePriceIcome()
         {
             errorsContainer.ClearErrors(() => PriceIcome);
-            errorsContainer.SetErrors(() => PriceIcome, Validate.Long(PriceIcome));
+            errorsContainer.SetErrors(() => PriceIcome, Validate.Double(PriceIcome));
         }
 
         #endregion
@@ -357,17 +357,17 @@ namespace Warehouse.Silverlight.MainModule
             id = product.Id;
             name = product.Name;
             size = product.Size;
-            k = product.K.ToString("0.##");
-            priceOpt = product.PriceOpt.ToString(CultureInfo.InvariantCulture);
-            priceRozn = Convert.ToInt64(product.PriceRozn);
+            k = product.K.ToString(CultureInfo.CurrentCulture);
+            priceOpt = product.PriceOpt.ToString(CultureInfo.CurrentCulture);
+            priceRozn = product.PriceRozn;
             weight = product.Weight;
-            count = product.Count.ToString(CultureInfo.InvariantCulture);
+            count = product.Count.ToString();
             if (product.Nd != null)
             {
                 nd = string.Join(" ", product.Nd);
             }
-            length = product.Length.ToString("0.##");
-            priceIcome = product.PriceIcome.ToString(CultureInfo.InvariantCulture);
+            length = product.Length.ToString(CultureInfo.CurrentCulture);
+            priceIcome = product.PriceIcome.ToString(CultureInfo.CurrentCulture);
             Internal = product.Internal;
             Firma = product.Firma;
         }
@@ -376,7 +376,7 @@ namespace Warehouse.Silverlight.MainModule
         {
             return (nd ?? string.Empty)
                 .Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(double.Parse)
+                .Select(x => Math.Round(double.Parse(x), 2))
                 .OrderByDescending(x => x)
                 .ToArray();
         }
