@@ -13,8 +13,8 @@ namespace Warehouse.Silverlight.MainModule
         protected string size;
         private string k;
         private string priceOpt;
-        private double priceRozn;
-        private double weight;
+        private decimal priceRozn;
+        private decimal weight;
         private string count;
         private string nd;
         private string length;
@@ -46,14 +46,14 @@ namespace Warehouse.Silverlight.MainModule
                 Id = id,
                 Name = name,
                 Size = size,
-                K = Math.Round(double.Parse(k), 2),
-                PriceOpt = Math.Round(double.Parse(priceOpt), 2),
-                PriceRozn = priceRozn,
-                Weight = weight,
+                K = double.Parse(k),
+                PriceOpt = double.Parse(priceOpt),
+                PriceRozn = (double) priceRozn,
+                Weight = (double) weight,
                 Count = int.Parse(count),
                 Nd = ParseNd(nd),
-                Length = Math.Round(double.Parse(length), 2),
-                PriceIcome = Math.Round(double.Parse(priceIcome), 2),
+                Length = double.Parse(length),
+                PriceIcome = double.Parse(priceIcome),
                 Internal = Internal,
                 IsSheet = GetIsSheet(),
                 Firma = Firma,
@@ -128,7 +128,7 @@ namespace Warehouse.Silverlight.MainModule
         private void ValidateK()
         {
             errorsContainer.ClearErrors(() => K);
-            errorsContainer.SetErrors(() => K, Validate.Double(K));
+            errorsContainer.SetErrors(() => K, Validate.DoubleMaxPrecision(K, 2));
         }
 
         #endregion
@@ -152,19 +152,19 @@ namespace Warehouse.Silverlight.MainModule
         private void ValidatePriceOpt()
         {
             errorsContainer.ClearErrors(() => PriceOpt);
-            errorsContainer.SetErrors(() => PriceOpt, Validate.Double(PriceOpt));
+            errorsContainer.SetErrors(() => PriceOpt, Validate.DoubleMaxPrecision(PriceOpt, 1));
         }
 
         #endregion
 
         #region PriceRozn
 
-        public double PriceRozn
+        public decimal PriceRozn
         {
             get { return priceRozn; }
             set
             {
-                if (Math.Abs(priceRozn - value) > double.Epsilon)
+                if (priceRozn != value)
                 {
                     priceRozn = value;
                     RaisePropertyChanged(() => PriceRozn);
@@ -188,12 +188,12 @@ namespace Warehouse.Silverlight.MainModule
 
         #region Weight
 
-        public double Weight
+        public decimal Weight
         {
             get { return weight; }
             set
             {
-                if (Math.Abs(weight - value) > double.Epsilon)
+                if (weight != value)
                 {
                     weight = value;
                     RaisePropertyChanged(() => Weight);
@@ -210,11 +210,11 @@ namespace Warehouse.Silverlight.MainModule
             else
             {
                 var _count = int.Parse(count);
-                var _length = double.Parse(length);
+                var _length = decimal.Parse(length);
                 var _nd = GetTotalNd();
-                var _k = double.Parse(k);
+                var _k = decimal.Parse(k);
 
-                Weight = Math.Round( (_count * _length + _nd) * _k, 3);
+                Weight = decimal.Round((_count * _length + _nd) * _k, 3);
             }
         }
 
@@ -268,10 +268,10 @@ namespace Warehouse.Silverlight.MainModule
                 var parts = nd.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var x in parts)
                 {
-                    var errors = Validate.Double(x).ToArray();
+                    var errors = Validate.DoubleMaxPrecision(x, 2).ToArray();
                     if (errors.Length > 0)
                     {
-                        errorsContainer.SetErrors(() => Nd, new[] { "дробные числа, разделенные пробелом" });
+                        errorsContainer.SetErrors(() => Nd, new[] { "дробные числа, разделенные пробелом,\nне более 2 знаков после запятой" });
                         break;
                     }
                 }
@@ -299,10 +299,10 @@ namespace Warehouse.Silverlight.MainModule
             }
         }
 
-        private void ValidateLength()
+        protected virtual void ValidateLength()
         {
             errorsContainer.ClearErrors(() => Length);
-            errorsContainer.SetErrors(() => Length, Validate.Double(Length));
+            errorsContainer.SetErrors(() => Length, Validate.DoubleMaxPrecision(Length, 2));
         }
 
         public virtual string LenghtLabel { get { return "Длина штанги (м)"; } }
@@ -330,7 +330,7 @@ namespace Warehouse.Silverlight.MainModule
         private void ValidatePriceIcome()
         {
             errorsContainer.ClearErrors(() => PriceIcome);
-            errorsContainer.SetErrors(() => PriceIcome, Validate.Double(PriceIcome));
+            errorsContainer.SetErrors(() => PriceIcome, Validate.DoubleMaxPrecision(PriceIcome, 1));
         }
 
         #endregion
@@ -359,8 +359,8 @@ namespace Warehouse.Silverlight.MainModule
             size = product.Size;
             k = product.K.ToString(CultureInfo.CurrentCulture);
             priceOpt = product.PriceOpt.ToString(CultureInfo.CurrentCulture);
-            priceRozn = product.PriceRozn;
-            weight = product.Weight;
+            priceRozn = (decimal) product.PriceRozn;
+            weight = (decimal) product.Weight;
             count = product.Count.ToString();
             if (product.Nd != null)
             {
@@ -376,18 +376,18 @@ namespace Warehouse.Silverlight.MainModule
         {
             return (nd ?? string.Empty)
                 .Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => Math.Round(double.Parse(x), 2))
+                .Select(double.Parse)
                 .OrderByDescending(x => x)
                 .ToArray();
         }
 
-        private double GetTotalNd()
+        private decimal GetTotalNd()
         {
             if (string.IsNullOrEmpty(nd))
             {
                 return 0;
             }
-            return nd.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(double.Parse).Sum();
+            return nd.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(decimal.Parse).Sum();
         }
     }
 }

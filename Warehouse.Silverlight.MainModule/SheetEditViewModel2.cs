@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Warehouse.Silverlight.Infrastructure;
 using Warehouse.Silverlight.Models;
@@ -47,6 +48,16 @@ namespace Warehouse.Silverlight.MainModule
 
         #endregion
 
+        #region Length
+
+        protected override void ValidateLength()
+        {
+            errorsContainer.ClearErrors(() => Length);
+            errorsContainer.SetErrors(() => Length, Validate.Double(Length));
+        }
+
+        #endregion
+
         protected override bool GetIsSheet()
         {
             return true;
@@ -61,7 +72,7 @@ namespace Warehouse.Silverlight.MainModule
             else
             {
                 var val = sheetSizes[1] / 1000 * sheetSizes[2] / 1000;
-                Length = val.ToString("0.000");
+                Length = Math.Round(val, 3).ToString(CultureInfo.CurrentCulture);
             }
         }
 
