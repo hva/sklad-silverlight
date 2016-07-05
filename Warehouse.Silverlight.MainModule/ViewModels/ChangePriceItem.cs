@@ -49,14 +49,14 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
 
         public void Refresh(double percentage)
         {
-            var a = new decimal(Product.PriceOpt);
-            var x = new decimal(percentage);
+            var a = (decimal) Product.PriceOpt;
+            var x = (decimal) percentage;
             var b = a * (1 + x / 100);
 
-            NewPriceOpt = decimal.Ceiling(b * 100) / 100;
+            NewPriceOpt = decimal.Ceiling(b * 10) / 10;
 
             var priceOptStr = newPriceOpt.ToString(CultureInfo.CurrentCulture);
-            NewPriceRozn = (decimal) ProductExtensions.CalculatePriceRozn(priceOptStr, k, length, Product.IsSheet);
+            NewPriceRozn = ProductExtensions.CalculatePriceRozn(priceOptStr, k, length, Product.IsSheet);
         }
     }
 }

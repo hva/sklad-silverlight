@@ -17,11 +17,17 @@
     Title="Пересчет цены">
 
     <controls:ChildWindow.Resources>
-        <Style x:Key="Default" TargetType="sdk:DataGridCell">
+        <Style x:Key="TextCellStyle" TargetType="sdk:DataGridCell" BasedOn="{StaticResource DataGridCell_Default}">
             <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
-        <Style TargetType="sdk:DataGridCell" BasedOn="{StaticResource Default}" />
-        <Style x:Key="Inactive" TargetType="sdk:DataGridCell" BasedOn="{StaticResource Default}">
+        <Style x:Key="ColumnHeaderRightStyle" TargetType="sdk:DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="ColumnHeaderLeftStyle" TargetType="sdk:DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="Inactive" TargetType="sdk:DataGridCell" BasedOn="{StaticResource TextCellStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
             <Setter Property="Opacity" Value="0.6" />
         </Style>
     </controls:ChildWindow.Resources>
@@ -40,42 +46,49 @@
 
         <StackPanel Orientation="Horizontal">
             <sdk:Label Content="Процент" Width="Auto" />
-            <TextBox Text="{Binding Percentage, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="40">
+            <TextBox Text="{Binding Percentage, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="80">
                 <i:Interaction.Behaviors>
                     <interactivity:UpdateTextBindingOnPropertyChanged />
                 </i:Interaction.Behaviors>
             </TextBox>
         </StackPanel>
 
-        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
+        <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Items}"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      ColumnHeaderStyle="{StaticResource ColumnHeaderRightStyle}"
+                      RowBackground="Transparent" AlternatingRowBackground="Transparent">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTextColumn
                     Header="Наимнование"
                     Binding="{Binding Product.Name}"
                     Width="150"
+                    HeaderStyle="{StaticResource ColumnHeaderLeftStyle}"
+                    CellStyle="{StaticResource TextCellStyle}"
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
                     Header="Размер"
                     Binding="{Binding Product.Size}"
                     Width="100"
+                    HeaderStyle="{StaticResource ColumnHeaderLeftStyle}"
+                    CellStyle="{StaticResource TextCellStyle}"
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
                     Header="Старая цена&#10;(опт.)"
-                    Binding="{Binding Product.PriceOpt, StringFormat='{}{0:##,0.00}'}"
+                    Binding="{Binding Product.PriceOpt, StringFormat='{}{0:##,0.0}'}"
                     CellStyle="{StaticResource Inactive}"
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
                     Header="Старая цена&#10;(розн.)"
-                    Binding="{Binding Product.PriceRozn, StringFormat='{}{0:##,0.00}'}"
+                    Binding="{Binding Product.PriceRozn, StringFormat='{}{0:##,0.0}'}"
                     CellStyle="{StaticResource Inactive}"
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
                     Header="Новая цена&#10;(опт.)"
-                    Binding="{Binding NewPriceOpt, StringFormat='{}{0:##,0.00}'}"
+                    Binding="{Binding NewPriceOpt, StringFormat='{}{0:##,0.0}'}"
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
                     Header="Новая цена&#10;(розн.)"
-                    Binding="{Binding NewPriceRozn, StringFormat='{}{0:##,0.00}'}"
+                    Binding="{Binding NewPriceRozn, StringFormat='{}{0:##,0.0}'}"
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
