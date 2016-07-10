@@ -84,7 +84,7 @@ namespace Warehouse.Silverlight.Data
                     }
                     else
                     {
-                        var uri = new Uri(string.Concat("api/products/", product.Id), UriKind.Relative);
+                        var uri = new Uri(string.Concat("api/v2/products/", product.Id), UriKind.Relative);
                         var resp = await client.PutAsync(uri, content);
                         if (resp.StatusCode == HttpStatusCode.OK)
                         {
@@ -105,7 +105,7 @@ namespace Warehouse.Silverlight.Data
                 var data = JsonConvert.SerializeObject(prices);
                 using (var content = new StringContent(data, Encoding.UTF8, "application/json"))
                 {
-                    var uri = new Uri("api/products/updatePrice", UriKind.Relative);
+                    var uri = new Uri("api/v2/products/updatePrice", UriKind.Relative);
                     var resp = await client.PutAsync(uri, content);
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
