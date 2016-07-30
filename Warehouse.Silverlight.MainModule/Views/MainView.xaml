@@ -157,7 +157,7 @@
                     d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn
                     Header="Цена&#10;с НДС (розн.)"
-                    Binding="{Binding PriceRozn, StringFormat='{}{0:#,0.0;#;#}'}"
+                    Binding="{Binding PriceRozn, StringFormat='{}{0:#,0.00;#;#}'}"
                     d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn
                     Header="Кол-во&#10;(кг.)"

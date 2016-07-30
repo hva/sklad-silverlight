@@ -14,7 +14,7 @@ namespace Warehouse.Silverlight.Models
                 var _l = decimal.Parse(length);
                 rozn *= _l;
             }
-            return decimal.Ceiling(rozn * 10) / 10;
+            return decimal.Ceiling(rozn * 100) / 100;
         }
 
         public static decimal CalculatePriceRozn(this Product p)
