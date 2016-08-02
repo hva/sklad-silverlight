@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 
 namespace Warehouse.Silverlight.Data.Http
 {
@@ -6,7 +7,7 @@ namespace Warehouse.Silverlight.Data.Http
     {
         public BaseHttpClient()
         {
-            BaseAddress = System.Windows.Browser.HtmlPage.Document.DocumentUri;
+            BaseAddress = new Uri("https://sklad-staging.skl.by:8000");
         }
     }
 }
