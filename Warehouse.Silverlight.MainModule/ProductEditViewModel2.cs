@@ -152,7 +152,7 @@ namespace Warehouse.Silverlight.MainModule
         private void ValidatePriceOpt()
         {
             errorsContainer.ClearErrors(() => PriceOpt);
-            errorsContainer.SetErrors(() => PriceOpt, Validate.DoubleMaxPrecision(PriceOpt, 1));
+            errorsContainer.SetErrors(() => PriceOpt, Validate.DoubleMaxPrecision(PriceOpt, 2));
         }
 
         #endregion
@@ -330,7 +330,7 @@ namespace Warehouse.Silverlight.MainModule
         private void ValidatePriceIcome()
         {
             errorsContainer.ClearErrors(() => PriceIcome);
-            errorsContainer.SetErrors(() => PriceIcome, Validate.DoubleMaxPrecision(PriceIcome, 1));
+            errorsContainer.SetErrors(() => PriceIcome, Validate.DoubleMaxPrecision(PriceIcome, 2));
         }
 
         #endregion

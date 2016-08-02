@@ -74,7 +74,7 @@
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
                     Header="Старая цена&#10;(опт.)"
-                    Binding="{Binding Product.PriceOpt, StringFormat='{}{0:##,0.0}'}"
+                    Binding="{Binding Product.PriceOpt, StringFormat='{}{0:##,0.00}'}"
                     CellStyle="{StaticResource Inactive}"
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
@@ -84,7 +84,7 @@
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
                     Header="Новая цена&#10;(опт.)"
-                    Binding="{Binding NewPriceOpt, StringFormat='{}{0:##,0.0}'}"
+                    Binding="{Binding NewPriceOpt, StringFormat='{}{0:##,0.00}'}"
                     d:DataContext="{d:DesignInstance Type=viewModels:ChangePriceItem}" />
                 <sdk:DataGridTextColumn
                     Header="Новая цена&#10;(розн.)"

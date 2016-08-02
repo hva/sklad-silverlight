@@ -53,7 +53,7 @@ namespace Warehouse.Silverlight.MainModule.ViewModels
             var x = (decimal) percentage;
             var b = a * (1 + x / 100);
 
-            NewPriceOpt = decimal.Ceiling(b * 10) / 10;
+            NewPriceOpt = decimal.Ceiling(b * 100) / 100;
 
             var priceOptStr = newPriceOpt.ToString(CultureInfo.CurrentCulture);
             NewPriceRozn = ProductExtensions.CalculatePriceRozn(priceOptStr, k, length, Product.IsSheet);

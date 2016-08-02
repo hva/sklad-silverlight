@@ -153,7 +153,7 @@
                     d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn
                     Header="Цена&#10;без НДС (опт.)"
-                    Binding="{Binding PriceOpt, StringFormat='{}{0:#,0.0;#;#}'}"
+                    Binding="{Binding PriceOpt, StringFormat='{}{0:#,0.00;#;#}'}"
                     d:DataContext="{d:DesignInstance Type=models:Product}" />
                 <sdk:DataGridTextColumn
                     Header="Цена&#10;с НДС (розн.)"
@@ -186,7 +186,7 @@
                     </sdk:DataGridTemplateColumn.CellStyle>
                 </sdk:DataGridTemplateColumn>
                 <sdk:DataGridTextColumn Header="Длина&#10;(м)" Binding="{Binding Length, StringFormat='{}{0:0.##;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
-                <sdk:DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome, StringFormat='{}{0:#,0.0;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
+                <sdk:DataGridTextColumn Header="Приходная" Binding="{Binding PriceIcome, StringFormat='{}{0:#,0.00;#;#}'}" d:DataContext="{d:DesignInstance Type=models:Product}" />
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
 
