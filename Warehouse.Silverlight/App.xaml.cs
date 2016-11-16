@@ -17,7 +17,19 @@ namespace Warehouse.Silverlight
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Bootstrapper bootstrapper = new Bootstrapper();
+            string apiHost;
+            if (!e.InitParams.TryGetValue("ApiHost", out apiHost))
+            {
+                throw new Exception("ApiHost init parameter not found");
+            }
+
+            Uri apiHostUri;
+            if (!Uri.TryCreate(apiHost, UriKind.Absolute, out apiHostUri))
+            {
+                throw new Exception("can't parse ApiHost uri");
+            }
+
+            Bootstrapper bootstrapper = new Bootstrapper(apiHostUri);
             bootstrapper.Run();
         }
 

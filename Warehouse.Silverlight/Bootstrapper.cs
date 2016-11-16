@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Browser;
 using System.Threading;
 using System.Windows;
@@ -17,12 +18,20 @@ namespace Warehouse.Silverlight
 {
     public class Bootstrapper : UnityBootstrapper
     {
+        private readonly Uri apiHostUri;
+
+        public Bootstrapper(Uri apiHostUri)
+        {
+            this.apiHostUri = apiHostUri;
+        }
+
         public override void Run(bool runWithDefaultConfiguration)
         {
             base.Run(runWithDefaultConfiguration);
 
             ((FrameworkElement)Shell).Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
 
+            // TODO: take scheme from apiHostUri
             WebRequest.RegisterPrefix("http://", WebRequestCreator.ClientHttp);
             WebRequest.RegisterPrefix("https://", WebRequestCreator.ClientHttp);
 
@@ -66,7 +75,6 @@ namespace Warehouse.Silverlight
             Container.RegisterType<ILogger, BrowserLogger>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<ISignalRClient, SignalRClient>(new ContainerControlledLifetimeManager());
-            
         }
 
         protected override DependencyObject CreateShell()

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ Page Language="C#" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -69,6 +71,7 @@
                 <param name="enableautozoom" value="false" />
                 <param name="uiculture" value="ru-RU" />
                 <param name="culture" value="ru-RU" />
+                <param name="initParams" value="ApiHost=<%= ConfigurationManager.AppSettings["ApiHost"] %>" />
                 <a href="//go.microsoft.com/fwlink/?LinkID=149156&v=5.0.61118.0" style="text-decoration:none">
                     <img src="//go.microsoft.com/fwlink/?LinkId=161376" alt="Get Microsoft Silverlight" style="border-style:none" />
                 </a>
