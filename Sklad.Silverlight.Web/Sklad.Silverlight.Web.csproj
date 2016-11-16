@@ -108,4 +108,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="BeforeBuild" Condition="'$(ApiHost)' != ''">
+    <XmlPoke XmlInputPath="Web.config"
+             Query="//appSettings/add[@key='ApiHost']/@value"
+             Value="$(ApiHost)" />
+  </Target>
 </Project>

@@ -32,6 +32,27 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.UsersModule", "Warehouse.Silverlight.UsersModule\Warehouse.Silverlight.UsersModule.csproj", "{BE169CBC-5E4B-423E-9B04-CAB520448ED0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sklad.Silverlight.Web", "Sklad.Silverlight.Web\Sklad.Silverlight.Web.csproj", "{791B3BDC-C731-480B-9A71-7C0DED6F5BAA}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_57732"
+		Debug.AspNetCompiler.PhysicalPath = "Sklad.Silverlight.Web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57732\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_57732"
+		Release.AspNetCompiler.PhysicalPath = "Sklad.Silverlight.Web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57732\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "57732"
+		SlnRelativePath = "Sklad.Silverlight.Web\"
+		DefaultWebSiteLanguage = "Visual C#"
+		ProjOutputReferences = "{ACA10940-D0C4-44DC-8012-703E69F58422}|ClientBin|false;"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
