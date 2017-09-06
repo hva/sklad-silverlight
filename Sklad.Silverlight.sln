@@ -32,6 +32,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Silverlight.UsersModule", "Warehouse.Silverlight.UsersModule\Warehouse.Silverlight.UsersModule.csproj", "{BE169CBC-5E4B-423E-9B04-CAB520448ED0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sklad.Silverlight", "Sklad.Silverlight\Sklad.Silverlight.csproj", "{C6780ABB-A0CA-4755-A85A-970046077B75}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ACA10940-D0C4-44DC-8012-703E69F58422} = {ACA10940-D0C4-44DC-8012-703E69F58422}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
