@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <SilverlightApplicationList>{ACA10940-D0C4-44DC-8012-703E69F58422}|..\Warehouse.Silverlight\Warehouse.Silverlight.csproj|ClientBin|False</SilverlightApplicationList>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,6 +67,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientBin\Warehouse.Silverlight.xap" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -75,6 +77,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Silverlight.js" />
+    <Content Include="Warehouse.SilverlightTestPage.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
