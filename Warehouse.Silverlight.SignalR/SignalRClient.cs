@@ -20,6 +20,8 @@ namespace Warehouse.Silverlight.SignalR
         {
             this.eventAggregator = eventAggregator;
 
+            return;
+
             connection = new HubConnection(System.Windows.Browser.HtmlPage.Document.DocumentUri.ToString());
             hubProxy = connection.CreateHubProxy(HubName);
 

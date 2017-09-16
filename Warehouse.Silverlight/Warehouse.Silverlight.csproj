@@ -136,6 +136,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="config.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -170,6 +172,10 @@
     <ProjectReference Include="..\Warehouse.Silverlight.Data\Warehouse.Silverlight.Data.csproj">
       <Project>{0C80B2FE-F560-41A3-B450-9AA2D5564325}</Project>
       <Name>Warehouse.Silverlight.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warehouse.Silverlight.Infrastructure\Warehouse.Silverlight.Infrastructure.csproj">
+      <Project>{11B43E9A-BCC5-49A4-A677-2AFFAF6F7F6B}</Project>
+      <Name>Warehouse.Silverlight.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warehouse.Silverlight.Log\Warehouse.Silverlight.Log.csproj">
       <Project>{DC5E6D0C-1F7A-4560-8E5B-98F1C043C03D}</Project>
@@ -199,9 +205,6 @@
       <Project>{BE169CBC-5E4B-423E-9B04-CAB520448ED0}</Project>
       <Name>Warehouse.Silverlight.UsersModule</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Debug.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
