@@ -6,13 +6,11 @@ namespace Sklad.Silverlight
     {
         static void Main(string[] args)
         {
-            var port = Config.Load().Port;
-
             HostFactory.Run(x =>
             {
                 x.Service<NancySelfHost>(s =>
                 {
-                    s.ConstructUsing(name => new NancySelfHost(port));
+                    s.ConstructUsing(name => new NancySelfHost());
                     s.WhenStarted(tc => tc.Start());
                     s.WhenStopped(tc => tc.Stop());
                 });

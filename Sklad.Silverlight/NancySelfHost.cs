@@ -6,18 +6,17 @@ namespace Sklad.Silverlight
     class NancySelfHost
     {
         private NancyHost host;
-        private readonly Uri uri;
-
-        public NancySelfHost(int port)
-        {
-            uri = new UriBuilder(Uri.UriSchemeHttp, "localhost", port).Uri;
-        }
 
         public void Start()
         {
-            host = new NancyHost(uri);
+            var ub = new UriBuilder
+            {
+                Host = "localhost",
+                Port = Config.Load().Port,
+            };
+            host = new NancyHost(ub.Uri);
             host.Start();
-            Console.WriteLine("Running on {0}.", uri);
+            Console.WriteLine("Running on {0}.", ub.Uri);
         }
 
         public void Stop()
